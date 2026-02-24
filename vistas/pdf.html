@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Certificado PDF</title>
+    <link rel="stylesheet" href="/css/pdf.css" />
+    
+
+    <link rel="shortcut icon" href="#">
+</head>
+<body>
+
+  <div class="contenedor">
+    <img  src="../assets/logoIngroup.png" alt="Descripción">
+  </div>
+
+
+  <div class="contenedor">
+    
+    <div class="rectangulo" id="titulo">
+      Tabla de Verificacion de Calibracion de Torquimetros
+    </div>
+  </div>
+
+  <div class="datos" id="datos1">
+    <div><strong><u>DATOS DEL INSTRUMENTO PADRON UTILIZADO</u></strong></div>
+    <br>
+    <div><strong>MARCA:</strong> <span id="marca"></span></div>
+    <br>
+    <div><strong>CODIGO:</strong> <span id="codigo"></span></div>
+    <br>
+    <div><strong>RANGO DE TORQUE[Nm]:</strong> <span id="rango"></span></div>
+    <br>
+    <div><strong>NRO DE SERIE:</strong> <span id="serie"></span></div>
+    <br>
+    <div><strong>TOLERANCIA[%]:</strong> <span id="tolerancia"></span></div>
+    <br>
+    
+    
+  </div>
+  
+
+  <table>
+  <tr>
+    <th class="celda-grande">Iteracion</th>
+    <div>
+    <th>
+      <div class="celda-dividida">
+        <div class="superior">Valor seleccionado:</div>
+        <div class="inferior">Valor medido[Nm] </div>
+      </div>
+    </th>
+    <th class="celda-grande">Error [%]</th>
+  </tr>
+  <tr>
+    <td class="celda-chica">1</td>
+    <td class="celda-chica">6.8</td>
+    <td class="celda-chica">-3.03</td>
+  </tr>
+  <tr>
+    <td class="celda-chica">2</td>
+    <td class="celda-chica">6.61</td>
+    <td class="celda-chica">-0.15</td>
+  </tr>
+  <tr>
+    <td class="celda-chica">3</td>
+    <td class="celda-chica">6.61</td>
+    <td class="celda-chica">-0.15</td>
+  </tr>
+  <tr>
+    <td class="celda-chica">4</td>
+    <td class="celda-chica">6.61</td>
+    <td class="celda-chica">-0.15</td>
+  </tr>
+  <tr>
+    <td class="celda-chica">5</td>
+    <td class="celda-chica">6.61</td>
+    <td class="celda-chica">-0.15</td>
+  </tr>
+</table>
+<br>
+
+<table>
+  <tr>
+    <th class="celda-grande">Iteracion</th>
+    <div>
+    <th>
+      <div class="celda-dividida">
+        <div class="superior">Valor seleccionado:</div>
+        <div class="inferior">Valor medido[Nm] </div>
+      </div>
+    </th>
+    <th class="celda-grande">Error [%]</th>
+  </tr>
+  <tr>
+    <td class="celda-chica">1</td>
+    <td class="celda-chica">6.8</td>
+    <td class="celda-chica">-3.03</td>
+  </tr>
+  <tr>
+    <td class="celda-chica">2</td>
+    <td class="celda-chica">6.61</td>
+    <td class="celda-chica">-0.15</td>
+  </tr>
+  <tr>
+    <td class="celda-chica">3</td>
+    <td class="celda-chica">6.61</td>
+    <td class="celda-chica">-0.15</td>
+  </tr>
+  <tr>
+    <td class="celda-chica">4</td>
+    <td class="celda-chica">6.61</td>
+    <td class="celda-chica">-0.15</td>
+  </tr>
+  <tr>
+    <td class="celda-chica">5</td>
+    <td class="celda-chica">6.61</td>
+    <td class="celda-chica">-0.15</td>
+  </tr>
+</table>
+
+<br>
+
+<table>
+  <tr>
+    <th class="celda-grande">Iteracion</th>
+    <div>
+    <th>
+      <div class="celda-dividida">
+        <div class="superior">Valor seleccionado:</div>
+        <div class="inferior">Valor medido[Nm] </div>
+      </div>
+    </th>
+    <th class="celda-grande">Error [%]</th>
+  </tr>
+  <tr>
+    <td class="celda-chica">1</td>
+    <td class="celda-chica">6.8</td>
+    <td class="celda-chica">-3.03</td>
+  </tr>
+  <tr>
+    <td class="celda-chica">2</td>
+    <td class="celda-chica">6.61</td>
+    <td class="celda-chica">-0.15</td>
+  </tr>
+  <tr>
+    <td class="celda-chica">3</td>
+    <td class="celda-chica">6.61</td>
+    <td class="celda-chica">-0.15</td>
+  </tr>
+  <tr>
+    <td class="celda-chica">4</td>
+    <td class="celda-chica">6.61</td>
+    <td class="celda-chica">-0.15</td>
+  </tr>
+  <tr>
+    <td class="celda-chica">5</td>
+    <td class="celda-chica">6.61</td>
+    <td class="celda-chica">-0.15</td>
+  </tr>
+</table>
+<br>
+
+<p id="resultados">Resultados</p>
+<p id="errorAbsoluto"></p>
+<p id="errorPorcentual"></p>
+<p id="cumple"></p>
+
+
+<script src="/js/pdf.js"></script>
+</body>
+</html>
+
+
+

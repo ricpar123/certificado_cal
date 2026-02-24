@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certificado / Verificacion de calibracion - Torquimetro</title>
+    <link rel="stylesheet" href="/css/styles.css" />
+    <link rel="shortcut icon" href="#">
+
+</head>
+<body>
+    <header class="topbar">
+        <div class="brand">
+            <div class="brand-title">INGROUP S.R.L.</div>
+            <div class="brand-subtitle">INGENIERÍA ELECTROMECÁNICA</div>
+        </div>
+  <!--      <div class="actions">
+            <button id="btnReset" class="btn btn-ghost" type="button">Limpiar</button>
+            <button id="btnExportJSON" class="btn" type="button">Exportar JSON</button>
+            <button id="btnPreview" class="btn btn-primary" type="button">Vista previa (luego PDF)</button>
+        </div>-->
+    </header>
+
+    <main class="container">
+    <h1 class="title">Formulario – Verificación de Calibración de Torquímetro</h1>
+
+    <!-- DATOS GENERALES -->
+    <section class="card">
+      <h2>Datos del instrumento</h2>
+
+      <div class="grid">
+        <label>
+          <span>Marca</span>
+          <input id="marca" type="text" />
+        </label>
+
+        <label>
+          <span>Codigo</span>
+          <input id="codigo" type="text" />
+        </label>
+
+        <label>
+          <span>Rango torque (mín)</span>
+          <input id="rangoMin" type="number" />
+        </label>
+
+        <label>
+          <span>Rango torque (máx)</span>
+          <input id="rangoMax" type="number" />
+        </label>
+
+        <label>
+          <span>Nro. Serie</span>
+          <input id="serie" type="text" />
+        </label>
+
+        <label>
+          <span>Tolerancia (± %)</span>
+          <input id="tolerancia" type="number" value="4" />
+        </label>
+
+        <label class="wide">
+          <span>Cliente</span>
+          <input id="cliente" type="text" />
+        </label>
+      </div>
+    </section>
+
+    <!-- CONDICIONES -->
+    <section class="card">
+      <h2>Condiciones y referencia</h2>
+
+      <div class="grid">
+        <label>
+          <span>Fecha</span>
+          <input id="fecha" type="date" />
+        </label>
+
+        <label>
+          <span>Temp. Ambiente (°C)</span>
+          <input id="tempC" type="number" step="0.1" value="30" />
+        </label>
+
+        <label>
+          <span>Humedad (%)</span>
+          <input id="humedad" type="number" step="1" value="40" />
+        </label>
+
+        <label class="wide">
+          <span>Instrumento padron</span>
+          <input id="instrumentacion" type="text"/>
+        </label>
+
+        <label class="wide">
+          <span>Realizado por</span>
+          <input id="tecnico" type="text"/>
+        </label>
+      </div>
+    </section>
+
+    <!-- PUNTOS -->
+    <section class="card">
+      <div class="row-between">
+        <h2>Valores tomados</h2>
+
+        <table id="miTabla">
+          <tr><th id="head1"><input type="text"/></th>
+            <td><input type="text" value="" /></td> 
+            <td><input type="text" value="" /></td> 
+            <td><input type="text" value="" /></td>
+            <td><input type="text" value="" /></td> 
+            <td><input type="text" value="" /></td> 
+          </tr>
+          <tr><th id="head2"><input type="text"  /></th>
+            <td><input type="text" value="" /></td> 
+            <td><input type="text" value="" /></td> 
+            <td><input type="text" value="" /></td> 
+            <td><input type="text" value="" /></td> 
+            <td><input type="text" value="" /></td> 
+
+          <tr><th id="head3"><input type="text"  /></th>  
+            <td><input type="text" value="" /></td> 
+            <td><input type="text" value="" /></td> 
+            <td><input type="text" value="" /></td>
+            <td><input type="text" value="" /></td> 
+            <td><input type="text" value="" /></td>
+          </tr>
+          
+        </table>
+
+       <label>Firma del Tecnico</label>
+
+       <div class='firma-wrap'>
+        <canvas id="firmaCanvas"></canvas>
+       </div>
+
+       <div class="firma-actions">
+          <button id="btnLimpiarFirma" type="button">Limpiar</button>
+           <button id="btnGuardarFirma" type="button">Guardar firma (base64)</button>
+       </div>
+
+       <input type="hidden" id="firmaBase64" />
+
+       
+    <button id="btnResultados" class="btn" type="button">Resultados</button>
+
+    <div id="salidaResultados"></div>
+
+    <button id="btnGuardar" class="btn" type="button" style="display: none;">
+        Guardar certificado
+    </button>
+
+    <button id="btnPdf" class="btn" type="button" style="display:none;">
+        Generar PDF
+    </button>
+
+
+
+
+      
+  </section>
+
+    <footer class="footnote">
+      <small>Luego clonamos el layout A4 del certificado y generamos el PDF final idéntico al actual.</small>
+    </footer>
+  </main>
+
+  
+  <script>
+    // Ejemplo de acceso a los valores de los inputs en la tabla
+    const tabla = document.getElementById('miTabla');
+    const inputs = tabla.querySelectorAll('input');
+    
+    inputs.forEach(input => {
+      input.addEventListener('change', (e) => {
+        console.log(`Nuevo valor: ${e.target.value}`);
+      });
+    });
+    
+    </script>
+  <script>
+(() => {
+  const canvas = document.getElementById("firmaCanvas");
+  const wrap = canvas.parentElement;
+  const ctx = canvas.getContext("2d");
+
+  // 🔥 Ajustar el tamaño REAL del canvas al tamaño CSS (y a la densidad de pantalla)
+  function resizeCanvas() {
+    const rect = canvas.getBoundingClientRect();
+    const dpr = window.devicePixelRatio || 1;
+
+    canvas.width  = Math.round(rect.width * dpr);
+    canvas.height = Math.round(rect.height * dpr);
+
+    // Escalar el contexto para que 1 unidad = 1 px CSS
+    ctx.setTransform(1, 0, 0, 1, 0, 0);
+    ctx.scale(dpr, dpr);
+
+    // Configuración de trazo (negro, visible)
+    ctx.lineWidth = 1;
+    ctx.lineCap = "round";
+    ctx.lineJoin = "round";
+    ctx.strokeStyle = "#000";
+  }
+
+  resizeCanvas();
+  window.addEventListener("resize", resizeCanvas);
+
+  let drawing = false;
+  let lastX = 0, lastY = 0;
+
+  function getPos(e) {
+
+
+    const rect = canvas.getBoundingClientRect();
+    const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+    const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+    return { x: clientX - rect.left, y: clientY - rect.top };
+  }
+
+  function start(e) {
+    e.preventDefault();
+    drawing = true;
+    const p = getPos(e);
+    lastX = p.x; lastY = p.y;
+  }
+
+  function move(e) {
+    const rW = wrap.getBoundingClientRect();
+    const rC = canvas.getBoundingClientRect();
+    console.log("wrap:", rW.left, rW.top, rW.width, rW.height);
+    console.log("canvas:", rC.left, rC.top, rC.width, rC.height);
+    if (!drawing) return;
+    e.preventDefault();
+    const p = getPos(e);
+
+    ctx.beginPath();
+    ctx.moveTo(lastX, lastY);
+    ctx.lineTo(p.x, p.y);
+    ctx.stroke();
+
+    lastX = p.x; lastY = p.y;
+  }
+
+  function end(e) {
+    if (!drawing) return;
+    e.preventDefault();
+    drawing = false;
+  }
+
+  // Mouse
+  canvas.addEventListener("mousedown", start);
+  canvas.addEventListener("mousemove", move);
+  window.addEventListener("mouseup", end);
+
+  // Touch
+  canvas.addEventListener("touchstart", start, { passive: false });
+  canvas.addEventListener("touchmove", move, { passive: false });
+  canvas.addEventListener("touchend", end);
+
+  // Botones
+  document.getElementById("btnLimpiarFirma").addEventListener("click", () => {
+    // limpiar
+    const rect = canvas.getBoundingClientRect();
+    ctx.clearRect(0, 0, rect.width, rect.height);
+    document.getElementById("firmaBase64").value = "";
+  });
+
+  document.getElementById("btnGuardarFirma").addEventListener("click", () => {
+    const dataUrl = canvas.toDataURL("image/png");
+    document.getElementById("firmaBase64").value = dataUrl;
+    console.log("Firma base64 OK (inicio):", dataUrl.slice(0, 40));
+    alert("Firma lista ✅");
+  });
+})();
+</script>
+
+  
+  <script src="/js/app.js"></script>
+  <script src="/js/cal.js"></script>
+    
+</body>
+</html>

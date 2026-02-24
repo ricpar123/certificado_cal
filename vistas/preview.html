@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="#">
+    <title>Preview Certificado</title>
+
+    <style>
+        @page {
+            size: A4;
+            margin: 15mm;
+        }
+        body {
+            font-family: Arial, sans-serif;
+            
+        }
+
+        .certificado {
+            width: 210mm;
+            min-height: 297mm;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th, td {
+            border: 1px solid #000;
+            padding: 5px;
+            font-size: 12px;
+            text-align: center;
+        }
+
+
+        .firma {
+            margin-top: 30px;
+        }
+
+        .firma img {
+            width: 200px;
+        }
+
+    </style>
+</head>
+
+<body>
+<div class="certificado">
+    <!-- Aquí se cargará el contenido del certificado para vista previa -->
+ <h2>Certificado de Calibración</h2>
+
+    <div><strong>Número:</strong> <span id="numero"></span></div>
+    <div><strong>Cliente:</strong> <span id="cliente"></span></div>
+    <div><strong>Serie:</strong> <span id="serie"></span></div>
+    <div><strong>Rango:</strong> <span id="rango"></span></div>
+
+ <h3>Resultados</h3> 
+    <div>Error absoluto general: <span id="eabs"></span></div>
+    <div>Error porcentual general: <span id="epct"></span></div>
+    <div>Resultado: <span id="resultado"></span></div>
+    
+    <h3>Puntos</h3>
+        <table id="tablaPuntos">
+            <thead>
+                <tr>
+                    <th>Nominal</th>
+                    <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
+    <div class="firma">
+        <strong>Firma del técnico:</strong><br>
+        <img id="firmaImg">
+        <div id="tecnico"></div>
+    </div>
+</div>
+
+<script>
+    const cert = JSON.parse(localStorage.getItem("certificado_para_pdf"));
+    
+        document.getElementById("numero").textContent = cert.numero ;
+        document.getElementById("cliente").textContent = cert.cliente;
+        document.getElementById("serie").textContent = cert.nroSerie;
+        document.getElementById("rango").textContent = cert.rangoMin + " - " + cert.rangoMax + " " + 'Nm';
+        document.getElementById("eabs").textContent = cert.errorGeneralAbsNm.toFixed(2)  + 'Nm';
+        document.getElementById("epct").textContent = cert.errorGeneralPct.toFixed(2) + " %";
+        document.getElementById("resultado").textContent = cert.resultadoFinal;
+
+        document.getElementById("firmaImg").src = cert.firmaTecnico;
+
+        document.getElementById("tecnico").textContent = cert.tecnico;
+
+        const tbodyPuntos = document.querySelector("#tablaPuntos tbody");
+
+cert.puntos.forEach(p => {
+  const tr = document.createElement("tr");
+  tr.innerHTML = `
+    <td>${p.nominal}</td>
+    <td>${p.mediciones[0] ?? ""}</td>
+    <td>${p.mediciones[1] ?? ""}</td>
+    <td>${p.mediciones[2] ?? ""}</td>
+    <td>${p.mediciones[3] ?? ""}</td>
+    <td>${p.mediciones[4] ?? ""}</td>
+  `;
+  tbodyPuntos.appendChild(tr);
+});
+
+window.print();
+
+
+
+
+       
+</script>
+        
+</body>
+</html>
