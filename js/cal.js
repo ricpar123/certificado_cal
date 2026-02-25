@@ -117,8 +117,8 @@ function calcularResultados() {
       // resultados finales
 
       puntos,    
-      errorGeneralAbsNm: Number(errorGeneralAbs).toFixed(2),
-      errorGeneralPct: Number(errorGeneralPct).toFixed(2),
+      errorGeneralAbsNm: Number(errorGeneralAbs.toFixed(2)),
+      errorGeneralPct: Number(errorGeneralPct.toFixed(2)),
       resultadoFinal: pasa ? "CUMPLE" : "NO CUMPLE",
     
     };

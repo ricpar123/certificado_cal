@@ -26,17 +26,12 @@
 
     <!-- DATOS GENERALES -->
     <section class="card">
-      <h2>Datos del instrumento</h2>
+      <h2>Datos del instrumento a calibrar</h2>
 
       <div class="grid">
         <label>
           <span>Marca</span>
           <input id="marca" type="text" />
-        </label>
-
-        <label>
-          <span>Codigo</span>
-          <input id="codigo" type="text" />
         </label>
 
         <label>
@@ -52,11 +47,6 @@
         <label>
           <span>Nro. Serie</span>
           <input id="serie" type="text" />
-        </label>
-
-        <label>
-          <span>Tolerancia (± %)</span>
-          <input id="tolerancia" type="number" value="4" />
         </label>
 
         <label class="wide">
@@ -88,7 +78,7 @@
 
         <label class="wide">
           <span>Instrumento padron</span>
-          <input id="instrumentacion" type="text"/>
+          <input id="padron" type="text"/>
         </label>
 
         <label class="wide">
@@ -161,7 +151,7 @@
   </section>
 
     <footer class="footnote">
-      <small>Luego clonamos el layout A4 del certificado y generamos el PDF final idéntico al actual.</small>
+      <small>Diseñado por @freeSoft</small>
     </footer>
   </main>
 
@@ -197,7 +187,7 @@
     ctx.scale(dpr, dpr);
 
     // Configuración de trazo (negro, visible)
-    ctx.lineWidth = 1;
+    ctx.lineWidth = 2.5;
     ctx.lineCap = "round";
     ctx.lineJoin = "round";
     ctx.strokeStyle = "#000";
