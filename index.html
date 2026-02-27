@@ -76,6 +76,11 @@
           <input id="humedad" type="number" step="1" value="40" />
         </label>
 
+        <label>
+          <span>Tolerancia (± %)</span>
+          <input id="tolerancia" type="number" value="4" />
+        </label>
+
         <label class="wide">
           <span>Instrumento padron</span>
           <input id="padron" type="text"/>
@@ -94,29 +99,38 @@
         <h2>Valores tomados</h2>
 
         <table id="miTabla">
-          <tr><th id="head1"><input type="text"/></th>
-            <td><input type="text" value="" /></td> 
-            <td><input type="text" value="" /></td> 
-            <td><input type="text" value="" /></td>
-            <td><input type="text" value="" /></td> 
-            <td><input type="text" value="" /></td> 
-          </tr>
-          <tr><th id="head2"><input type="text"  /></th>
-            <td><input type="text" value="" /></td> 
-            <td><input type="text" value="" /></td> 
-            <td><input type="text" value="" /></td> 
-            <td><input type="text" value="" /></td> 
-            <td><input type="text" value="" /></td> 
+  <thead>
+    <tr>
+      <th>Rep</th>
+      <th id="head1"><input type="text" placeholder="Nominal 1"></th>
+      <th id="head2"><input type="text" placeholder="Nominal 2"></th>
+      <th id="head3"><input type="text" placeholder="Nominal 3"></th>
+    </tr>
+  </thead>
 
-          <tr><th id="head3"><input type="text"  /></th>  
-            <td><input type="text" value="" /></td> 
-            <td><input type="text" value="" /></td> 
-            <td><input type="text" value="" /></td>
-            <td><input type="text" value="" /></td> 
-            <td><input type="text" value="" /></td>
-          </tr>
-          
-        </table>
+  <tbody>
+    <tr>
+      <th>1</th>
+      <td><input></td><td><input></td><td><input></td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td><input></td><td><input></td><td><input></td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td><input></td><td><input></td><td><input></td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td><input></td><td><input></td><td><input></td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td><input></td><td><input></td><td><input></td>
+    </tr>
+  </tbody>
+</table>
 
        <label>Firma del Tecnico</label>
 
@@ -126,7 +140,7 @@
 
        <div class="firma-actions">
           <button id="btnLimpiarFirma" type="button">Limpiar</button>
-           <button id="btnGuardarFirma" type="button">Guardar firma (base64)</button>
+           
        </div>
 
        <input type="hidden" id="firmaBase64" />
@@ -236,11 +250,19 @@
     if (!drawing) return;
     e.preventDefault();
     drawing = false;
+
+    //Auto-guardar firma al soltar
+    const dataUrl = canvas.toDataURL("imagr/png");
+    const hidden = document.getElementById("firmaBase64");
+    if(hidden) hidden.value = dataUrl;
+
+    console.log('firma auto-guardada:', dataUrl.slice(0,30));
   }
 
   // Mouse
   canvas.addEventListener("mousedown", start);
   canvas.addEventListener("mousemove", move);
+  canvas.addEventListener("mouseleave", end)
   window.addEventListener("mouseup", end);
 
   // Touch
@@ -256,12 +278,7 @@
     document.getElementById("firmaBase64").value = "";
   });
 
-  document.getElementById("btnGuardarFirma").addEventListener("click", () => {
-    const dataUrl = canvas.toDataURL("image/png");
-    document.getElementById("firmaBase64").value = dataUrl;
-    console.log("Firma base64 OK (inicio):", dataUrl.slice(0, 40));
-    alert("Firma lista ✅");
-  });
+  
 })();
 </script>
 
