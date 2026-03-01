@@ -25,6 +25,11 @@
   </div>
 
   <div class="datos" id="datos1">
+    <div class="contenedor1">
+      <div><strong>Numero del Certificado:</strong> <span id="numero"></span></div>
+      <div><strong>Fecha:</strong><span id="fecha"></span></div>
+    </div>
+    <br>
     <div><strong><u>DATOS DEL TORQUIMETRO A CALIBRAR</u></strong></div>
     <br>
     <div><strong>MARCA:</strong> <span id="marca"></span></div>
@@ -35,144 +40,39 @@
     <br>
     <div><strong>CLIENTE:</strong> <span id="cliente"></span></div>
     <br>
-    <div><strong><u>INSTRUMENTO PADRON</u></strong></div>
+    <div><strong>INSTRUMENTO PADRON:</strong><span id="padron"></span></div>
     <br>
-    <div><strong>MARCA:</strong> <span id="marca"></span></div>
+    <div><strong>TOLERANCIA [%]:</strong> <span id="tolerancia"></span></div>
     <br>
-    <div><strong>NRO DE SERIE:</strong> <span id="serie"></span></div>
-    <br>
+   
     
   </div>
+  <h3>Mediciones obtenidas</h3>
+        <table id="tablaPuntos">
+            <thead>
+                <tr>
+                    <th>Nominal</th>
+                    <th>1</th><th>2</th><th>3</th><th>4</th><th>5</th>
+                </tr>
+            </thead>
+            <tbody></tbody>
+        </table>
+
   
-
-  <table>
-  <tr>
-    <th class="celda-grande">Iteracion</th>
-    <div>
-    <th>
-      <div class="celda-dividida">
-        <div class="superior">Valor seleccionado:</div>
-        <div class="inferior">Valor medido[Nm] </div>
-      </div>
-    </th>
-    <th class="celda-grande">Error [%]</th>
-  </tr>
-  <tr>
-    <td class="celda-chica">1</td>
-    <td class="celda-chica">6.8</td>
-    <td class="celda-chica">-3.03</td>
-  </tr>
-  <tr>
-    <td class="celda-chica">2</td>
-    <td class="celda-chica">6.61</td>
-    <td class="celda-chica">-0.15</td>
-  </tr>
-  <tr>
-    <td class="celda-chica">3</td>
-    <td class="celda-chica">6.61</td>
-    <td class="celda-chica">-0.15</td>
-  </tr>
-  <tr>
-    <td class="celda-chica">4</td>
-    <td class="celda-chica">6.61</td>
-    <td class="celda-chica">-0.15</td>
-  </tr>
-  <tr>
-    <td class="celda-chica">5</td>
-    <td class="celda-chica">6.61</td>
-    <td class="celda-chica">-0.15</td>
-  </tr>
-</table>
 <br>
 
-<table>
-  <tr>
-    <th class="celda-grande">Iteracion</th>
-    <div>
-    <th>
-      <div class="celda-dividida">
-        <div class="superior">Valor seleccionado:</div>
-        <div class="inferior">Valor medido[Nm] </div>
-      </div>
-    </th>
-    <th class="celda-grande">Error [%]</th>
-  </tr>
-  <tr>
-    <td class="celda-chica">1</td>
-    <td class="celda-chica">6.8</td>
-    <td class="celda-chica">-3.03</td>
-  </tr>
-  <tr>
-    <td class="celda-chica">2</td>
-    <td class="celda-chica">6.61</td>
-    <td class="celda-chica">-0.15</td>
-  </tr>
-  <tr>
-    <td class="celda-chica">3</td>
-    <td class="celda-chica">6.61</td>
-    <td class="celda-chica">-0.15</td>
-  </tr>
-  <tr>
-    <td class="celda-chica">4</td>
-    <td class="celda-chica">6.61</td>
-    <td class="celda-chica">-0.15</td>
-  </tr>
-  <tr>
-    <td class="celda-chica">5</td>
-    <td class="celda-chica">6.61</td>
-    <td class="celda-chica">-0.15</td>
-  </tr>
-</table>
-
-<br>
-
-<table>
-  <tr>
-    <th class="celda-grande">Iteracion</th>
-    <div>
-    <th>
-      <div class="celda-dividida">
-        <div class="superior">Valor seleccionado:</div>
-        <div class="inferior">Valor medido[Nm] </div>
-      </div>
-    </th>
-    <th class="celda-grande">Error [%]</th>
-  </tr>
-  <tr>
-    <td class="celda-chica">1</td>
-    <td class="celda-chica">6.8</td>
-    <td class="celda-chica">-3.03</td>
-  </tr>
-  <tr>
-    <td class="celda-chica">2</td>
-    <td class="celda-chica">6.61</td>
-    <td class="celda-chica">-0.15</td>
-  </tr>
-  <tr>
-    <td class="celda-chica">3</td>
-    <td class="celda-chica">6.61</td>
-    <td class="celda-chica">-0.15</td>
-  </tr>
-  <tr>
-    <td class="celda-chica">4</td>
-    <td class="celda-chica">6.61</td>
-    <td class="celda-chica">-0.15</td>
-  </tr>
-  <tr>
-    <td class="celda-chica">5</td>
-    <td class="celda-chica">6.61</td>
-    <td class="celda-chica">-0.15</td>
-  </tr>
-</table>
-<br>
-
-<p id="resultados"><u>Resultados</u></p>
-<p id="errorAbsoluto"></p>
-<p id="errorPorcentual"></p>
-<p id="cumple"></p>
+<h3>Resultados</h3>
+    <div>Error absoluto general [Nm]: <span id="eabs"></span></div>
+    <div>Error porcentual general [%]: <span id="epct"></span></div>
+    <div>Resultado Final:<span id="resultado"></span></div>
+    <div class="firma">
+        <strong>Firma del técnico:</strong><br>
+        <img id="firmaImg">
+        <div id="tecnico"></div>
+    </div>    
 
 
-<script src="/js/pdf.js"></script>
+<script src = "/js/pdf.js"></script>
 </body>
 </html>
 

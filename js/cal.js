@@ -156,6 +156,7 @@ function calcularResultados() {
         rangoMax: Number(must("rangoMax")?.value),
 
         cliente: must("cliente")?.value?.trim() ?? "",
+        padron: must("padron")?.value?.trim() ?? "",
 
         tolerancia,
         temperatura: Number(must("tempC")?.value ?? ""),
@@ -168,7 +169,8 @@ function calcularResultados() {
         puntos,
         errorGeneralAbsNm: Number(errorAbs.toFixed(2)),
         errorGeneralPct: Number(errorPct.toFixed(2)),
-        resultadoFinal: pasa ? "CUMPLE" : "NO CUMPLE",
+        resultadoFinal: pasa ? "CUMPLE con las especificaciones del fabricante" : 
+                                "NO CUMPLE con las especificaciones del fabricante",
 
         firmaTecnico: must("firmaBase64")?.value ?? ""
       };
@@ -209,14 +211,14 @@ function calcularResultados() {
   document.getElementById("btnPdf").addEventListener("click", () => {
     
     console.log("certFinal:", certificadoFinal);
-    /*
+    
     if (!certificadoFinal.numero) {
       alert("Primero guardá el certificado para obtener el número.");
       return;
     }
   
     window.open("../vistas/preview.html");
-   */
+   
   });
 
 });
