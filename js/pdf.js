@@ -1,5 +1,14 @@
-const cert = JSON.parse(localStorage.getItem("certificado_para_pdf"));
-console.log("certificadoFinal:", cert);
+
+console.log('pdf.js ya cargado');
+
+const raw = sessionStorage.getItem("cert_pdf");
+
+if(!raw) {
+  alert("No hay certificado cargado");
+} else {
+  const cert = JSON.parse(raw);
+  console.log("Cert recibido", cert);
+
 
 const min = cert.rangoMin;
 const max = cert.rangoMax;
@@ -12,6 +21,8 @@ document.getElementById("rango").textContent = rango;
 document.getElementById("serie").textContent = cert.nroSerie;
 document.getElementById("cliente").textContent = cert.cliente;
 document.getElementById("padron").textContent = cert.padron;
+
+
 
 const fechaOrig = new Date(cert.fecha);
 const fechaFormat = fechaOrig.toLocaleDateString("es-ES");
@@ -40,7 +51,19 @@ document.getElementById("firmaImg").src = cert.firmaTecnico;
 document.getElementById("tecnico").textContent = cert.tecnico;
 document.getElementById("tolerancia").textContent = cert.tolerancia;
 
+
+
 window.print(); 
+
+
+
+}
+
+
+
+  
+
+
 
 
 
